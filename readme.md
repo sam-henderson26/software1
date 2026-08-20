@@ -9,6 +9,4 @@ I did exercises 1,2
 I did exercises 1,2
 
 ## Module 3
-I began Module 3
-
-This line is a test
+I did exercises 1, 2, and 3 
