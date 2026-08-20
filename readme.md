@@ -10,3 +10,5 @@ I did exercises 1,2
 
 ## Module 3
 I began Module 3
+
+This line is a test
