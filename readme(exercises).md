@@ -23,3 +23,6 @@ I did exercises 1, 2, 3, and 4.
 ## Module 7
 I did exercises 1, 2, 3, 4, 5, and 6, but I cannot get 6 to be correct on Moodle,
 because of spaces or line breaks, I am not sure..
+
+## Module 8
+Completed exercises 1, 2, and 3.
