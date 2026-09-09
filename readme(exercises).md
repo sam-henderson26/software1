@@ -26,3 +26,6 @@ because of spaces or line breaks, I am not sure..
 
 ## Module 8
 Completed exercises 1, 2, and 3.
+
+## Module 9
+Completed exercises 1, 2
