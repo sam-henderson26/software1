@@ -1,4 +1,5 @@
-def player_inventory():
-    "money" = 0,
-    "wood" = 0,
-    "axe" = "boring axe"
+player_inventory = {
+    "Axe": 1,
+    "Gold": 0,
+    "Wood": 0
+}

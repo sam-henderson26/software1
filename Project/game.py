@@ -4,16 +4,6 @@ player_name = input("State your name: ")
 player_age = int(input("State your age: "))
 game_name = ("The Lumberjack")
 
-
-if player_age < 12:
-    print("You are too young to play this game.")
-if player_age >= 12:
-    print(("Your name: ") + str(player_name))
-    print(("your age: ") + str(player_age))
-    print("")
-    print(f"Welcome {player_name} to {game_name}, you can enter prompted commands to play the game, or if you would like to quit at any time, type 'lopeta'.")
-    print("")
-
 def begin_game():    
     beginning = input("You look into the forest, focusing on the amalgamation of roots covering the exit, do you 'attack' the roots or 'go home'? ")
     if beginning == "attack":
@@ -57,6 +47,11 @@ def after_shack():
         # add next area and decisions.
     elif choice1 == "i":
         # add inventory in here.
+        player_inventory = {
+    "Axe": 1,
+    "Gold": 0,
+    "Wood": 0
+}
     else:
         print("")
         print("that is not a valid command, please try again")
@@ -64,6 +59,45 @@ def after_shack():
         after_shack()
 
 
+def rules():
+    while True:
+        print("")
+        print("Each move is made by choosing one of two options, this is done by typing one of those actions.")
+        print("Sometimes you will have an opportunity to add things to your inventory, don't miss these!")
+        print("Get to the end by finding the correct route whilst building up your inventory value as much as possible.")
+        print("")
+        return_to_main_menu = input("Type 'back' to return to the main menu: ")
+        if return_to_main_menu == "back":
+            break
+        else:
+            print("Please type 'back', to return to the main menu.")
 
+def quit_game():
+    print("Thank you for trying the game!")
+    exit()
+    
+def main_menu():
+    while True:
+        print("The Lumberjack")
+        print("'1': Begin Chopping")
+        print("'2': Rules")
+        print("'3': Quit game")
+        main_menu_choice = input("Please choose an option: ")
+        if main_menu_choice == "1":
+            begin_game()
+        if main_menu_choice == "2":
+            rules()
+        if main_menu_choice == "3":
+            quit_game()
+        else:
+            print("Please type 1, 2, or 3.")
+
+
+if player_age < 12:
+    print("You are too young to play this game.")
 if player_age >= 12:
-    begin_game()
+    print(("Your name: ") + str(player_name))
+    print(("your age: ") + str(player_age))
+    print("")
+    print(f"Welcome {player_name}!")
+    main_menu()
