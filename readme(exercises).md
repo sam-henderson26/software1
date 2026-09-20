@@ -28,4 +28,7 @@ because of spaces or line breaks, I am not sure..
 Completed exercises 1, 2, and 3.
 
 ## Module 9
-Completed exercises 1, 2
+Completed exercises 1, 2, 3, but not 4.
+
+## Module 10
+Completed exercises 1, 2, 3, but not 4.
