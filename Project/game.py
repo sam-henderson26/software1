@@ -4,6 +4,13 @@ player_name = input("State your name: ")
 player_age = int(input("State your age: "))
 game_name = ("The Lumberjack")
 
+player_inventory = {
+    "Axe": 1,
+    "Gold": 0,
+    "Wood": 0
+}
+
+# Game areas:
 def begin_game():    
     beginning = input("You look into the forest, focusing on the amalgamation of roots covering the exit, do you 'attack' the roots or 'go home'? ")
     if beginning == "attack":
@@ -47,18 +54,14 @@ def after_shack():
         # add next area and decisions.
     elif choice1 == "i":
         # add inventory in here.
-        player_inventory = {
-    "Axe": 1,
-    "Gold": 0,
-    "Wood": 0
-}
+        print(player_inventory)
     else:
         print("")
         print("that is not a valid command, please try again")
         print("")
         after_shack()
 
-
+# Main menu:
 def rules():
     while True:
         print("")
