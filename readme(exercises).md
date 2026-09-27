@@ -32,3 +32,6 @@ Completed exercises 1, 2, 3, but not 4.
 
 ## Module 10
 Completed exercises 1, 2, 3, but not 4.
+
+## Module 11
+Completed exercises 1 and 2.

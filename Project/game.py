@@ -1,68 +1,119 @@
 import random
 
-player_name = input("State your name: ")
-player_age = int(input("State your age: "))
-game_name = ("The Lumberjack")
-
-player_inventory = {
+class Player:
+    def __init__(self, name, location):
+        self.name = name
+        self.location = location
+        self.inventory = {
     "Axe": 1,
     "Gold": 0,
     "Wood": 0
 }
 
-# Game areas:
-def begin_game():    
-    beginning = input("You look into the forest, focusing on the amalgamation of roots covering the exit, do you 'attack' the roots or 'go home'? ")
-    if beginning == "attack":
-        print("")
-        print("You have no way of breaking through them, yet still, you try, and your hands hurt after trying.")
-        print("")
-        print("Lets try this again:")
-        print("")
-        begin_game()
-    elif beginning == "go home":
-        print("")
-        print("you turn back, returning to your makeshift shack. ")
-        print("You sit on the chair and look at what is on the table: ")
-        print("an axe, and a coin purse. ")
-        print("You take both: ")
-        print("You can now view your inventory with 'i'")
-        after_shack()
-    else:
-        print("")
-        print("that is not a valid command, please try again")
-        print("")
-        begin_game()
 
-def after_shack():
+user_name = input("State your name: ")
+player_age = int(input("State your age: "))
+game_name = ("The Lumberjack")
+
+user = Player(name = user_name, location = "main_menu")
+
+# Game areas:
+def begin_game(player):
+    while  True:
+        beginning = input("You look into the forest, focusing on the amalgamation of roots covering the exit, do you 'attack' the roots or 'go home'? ")
+        if beginning == "attack":
+            print("")
+            print("You have no way of breaking through them, yet still, you try, and your hands hurt after trying.")
+            print("")
+            print("Lets try this again:")
+            print("")
+
+        elif beginning == "go home":
+            print("")
+            print("you turn back, returning to your makeshift shack. ")
+            print("You get home, and pick up the items from the table: an axe, and a coin purse, putting them into your backpack.")
+            print("You can now view your inventory with 'i'")
+            break
+        else:
+            print("")
+            print("that is not a valid command, please try again")
+            print("")
+    after_shack(player)
+
+def after_shack(player):
     print("You now break through the roots with ease, travelling in towards the dense, packed forest")
-    print("The path forks ahead, to your left, a clearing with some smaller, lighter trees; to your right, the forest remains dense and and difficult to navigate.")
-    choice1 = input("Do you travel 'left' or 'right'? You can view your inventory wiht 'i'.")
-    if choice1 == "left":
-        input("These trees look like your axe could handle them, will you try to cut them down ('y/n') ? ")
-        if "y":
-            print("You chopped down the smallest tree, the only one your axe could handle,")
-            print("as it fell, a bird's nest fell with it, destroying the bird's home.")
-            # roll random number between 1-5 (due to having only boring axe) to see how much wood the player receives.
-            # add wood to inventory
-            print("With the wood in your bag, you now backtrack and travel down the dark path.")
-            #add next area and decisions.
-        if "n":
-            print("There is nothing else to do here, you backtrack and go down the dark path instead.")
-    elif choice1 == "right":
-        print("You decide to continue down the spiralled darker path, holding your axe close as the light struggles to penetrate the woodland.")
-        # add next area and decisions.
-    elif choice1 == "i":
-        # add inventory in here.
-        print(player_inventory)
-    else:
-        print("")
-        print("that is not a valid command, please try again")
-        print("")
-        after_shack()
+    print("The path forks ahead, to your left, a clearing with some smaller, lighter trees; to your right, the forest remains dense and difficult to navigate.")
+    while True:
+        choice1 = input("Do you travel 'left' or 'right'? inventory 'i'. ")
+        if choice1 == "left":
+            while True:
+                choice2 = input("These trees look like your axe could handle them, will you try to cut them down ('y/n') ? ")
+                if choice2 == "y":
+                    print("You chopped down the smallest tree, the only one your axe could handle,")
+                    print("as it fell, a bird's nest fell with it, destroying the bird's home.")
+                    axe1_roll = random.randint(1,3)
+                    print(f"The tree produced {axe1_roll} wood.")
+                    player.inventory["Wood"] += axe1_roll
+                    print("With the wood in your bag, you now backtrack and travel down the dark path.")
+                    dark_path(player)
+                    return
+                elif choice2 == "n":
+                    print("There is nothing else to do here, you backtrack and go down the dark path instead.")
+                    dark_path(player)
+                    return
+                else:
+                    print("")
+                    print("that is not a valid command, please try again")
+                    print("")            
+            
+        elif choice1 == "right":
+            dark_path(player)
+            return
+            
+        elif choice1 == "i":
+            print("")
+            print(player.inventory)
+            print("")
+        
+        else:
+            print("")
+            print("that is not a valid command, please try again")
+            print("")
+
+def dark_path(player):
+    print("The roots tighten around the pathway, the atmosphere gets darker and the air gets heavy...")
+    print("You see the silhouette of a structure to the left, and a huddle of trees awaiting chopping to the right.")
+    while True:
+        choice3 = input("Do you head 'left' or 'right'? ")
+        if choice3 == "left":
+            print("You head into the fog and towards the structure; as it comes clearer into view, you see a lady buying wood:")
+            while True:
+                choice4 = input("'Would you like to sell your logs to me? I'll pay you 2 coins for every log!' she states. (y/n): ")
+                if choice4 == "y":
+                    print("You hand over your logs and she gives you some coins.")
+                    player.inventory["Gold"] += (player.inventory["Wood"] * 2)
+                    player.inventory["Wood"] = 0
+                    print(player.inventory)
+                    #next area
+                    return
+                elif choice4 == "n":
+                    print("You decide to not sell your logs to the lady.")
+                    #next area
+                    return
+                else:
+                    print("")
+                    print("that is not a valid command, please try again")
+                    print("")
+
+        elif choice3 == "right":
+            # do this side of the choice next
+            return
+
+
+
 
 # Main menu:
-def rules():
+def rules(player):
     while True:
         print("")
         print("Each move is made by choosing one of two options, this is done by typing one of those actions.")
@@ -75,11 +126,11 @@ def rules():
         else:
             print("Please type 'back', to return to the main menu.")
 
-def quit_game():
+def quit_game(player):
     print("Thank you for trying the game!")
     exit()
     
-def main_menu():
+def main_menu(player):
     while True:
         print("The Lumberjack")
         print("'1': Begin Chopping")
@@ -87,20 +138,34 @@ def main_menu():
         print("'3': Quit game")
         main_menu_choice = input("Please choose an option: ")
         if main_menu_choice == "1":
-            begin_game()
+            begin_game(player)
+            return
         if main_menu_choice == "2":
-            rules()
+            rules(player)
         if main_menu_choice == "3":
-            quit_game()
+            quit_game(player)
+            return
         else:
             print("Please type 1, 2, or 3.")
 
+area_map = {
+    "main_menu": main_menu,
+    "rules": rules,
+    "begin_game": begin_game,
+    "after_shack": after_shack,
+    "dark_path": dark_path,
+
+    "quit_game": quit_game
+}
 
 if player_age < 12:
     print("You are too young to play this game.")
 if player_age >= 12:
-    print(("Your name: ") + str(player_name))
-    print(("your age: ") + str(player_age))
+    print(f"Your name: {user.name}")
+    print(f"your age: {player_age}")
     print("")
-    print(f"Welcome {player_name}!")
-    main_menu()
+    print(f"Welcome {user.name}!")
+
+    while True:
+        current_area = user.location
+        area_map[current_area](user)
