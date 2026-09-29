@@ -1,0 +1,2 @@
+add item class and add a rabbit's foot (would make the user get more wood from chopping trees)
+add in a portal which is paid to enter from one side (eg left) and have it come out in front of a useful place, such as another shop or bundle of trees. 

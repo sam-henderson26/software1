@@ -1,5 +1,7 @@
 import random
 
+# CLASSES:
+
 class Area:
     def __init__(self, name, description, action):
         self.name = name
@@ -16,12 +18,15 @@ class Player:
     "Wood": 0
 }
 
+# ENTRANCE TO MAIN MENU:
+
 user_name = input("State your name: ")
 player_age = int(input("State your age: "))
 game_name = ("The Lumberjack")
 
 if player_age < 12:
     print("You are too young to play this game.")
+    exit()
 
 user = Player(name = user_name, location = "main_menu")
 
@@ -30,8 +35,9 @@ print(f"your age: {player_age}")
 print("")
 print(f"Welcome {user.name}!")
 
-# Game areas:
+# GAME DECISIONS:
 
+# (MAIN MENU OPTIONS):
 def main_menu_start(player):
     while True:
         print("'1': Begin Chopping")
@@ -60,6 +66,7 @@ def quit_game_start(player):
     exit()
 
 
+# START OF GAME AND OPTIONS:
 
 def begin_game_start(player):
     while  True:
@@ -144,6 +151,7 @@ def dark_path_start(player):
 
 
     
+# DICTIONARY OF AREAS (ROOMS):
 
 area_map = {
     "main_menu": Area(
@@ -179,6 +187,7 @@ area_map = {
 }
 
 
+# MAKE THE GAME WORK AND UPDATES PLAYER LOCATION:
 
 while True:
     area_place = user.location

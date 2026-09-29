@@ -1,6 +1,6 @@
 
 
-# copy of code before changing the functioned areas into dictionary. #
+# copy of code before changing the functioned areas into dictionary. # No longer used..
 
 
 
@@ -168,15 +168,6 @@ def main_menu(player):
         else:
             print("Please type 1, 2, or 3.")
 
-area_map = {
-    "main_menu": main_menu,
-    "rules": rules,
-    "begin_game": begin_game,
-    "after_shack": after_shack,
-    "dark_path": dark_path,
-
-    "quit_game": quit_game
-}
 
 if player_age < 12:
     print("You are too young to play this game.")
@@ -185,8 +176,3 @@ if player_age >= 12:
     print(f"your age: {player_age}")
     print("")
     print(f"Welcome {user.name}!")
-
-    while True:
-        current_area = user.location
-        area_map[current_area](user)
-
