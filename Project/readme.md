@@ -11,3 +11,7 @@ I am not too sure what project 3 means with the instructions, i do not understan
 Expanded on the game by adding most of a new area, changed a lot of the workings of the code as I ran into some problems. 
 Have not fully completed the classes as I realise I must change the entire way I have written the areas.
 Will do more progress tomorrow (28/9)
+
+Added in multiple endings to the game, many lines, added in intro.txt and instructions.txt and made it so the game will dump both upon running the game. 2/10
+
+added in a save game function but cant get it to work... 2/10
