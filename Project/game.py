@@ -1,9 +1,15 @@
+# imports required systems, random is for random number generation on cutting down trees
+# json is for dumping intro and instructions text from other files.
+# also supposed to be for helping save the game however, i cant make it work.
+
 import random
 import json
 import os
 
 
 # CLASSES:
+# Area class holds information of each room, name, description and action
+# action = the name of the functions
 
 class Area:
     def __init__(self, name, description, action):
@@ -11,6 +17,8 @@ class Area:
         self.description = description
         self.action = action
 
+# player class holds the information the user inputs, the inventory which stays up to date as they progress through
+# the game, and also the location, which gets updated each time they move.
 class Player:
     def __init__(self, name, location):
         self.name = name
@@ -20,24 +28,24 @@ class Player:
     "Gold": 0,
     "Wood": 0
 }
-
+# Item class supposed to be for an item which would increase the number of coins gained from selling wood.
+# However did not use an item as I got overcome with all of the endings.
 class Item:
     def __init__ (self, name, description, multiplier = 1):
         self.name = name
         self.description = description
         self.multipler = multiplier
 
-
+# 1st Try: pulls the data from the file (intro.txt) inside the folder (Project) to paste it into the game terminal
+# when the user presses the run command. 
 try:
     with open ("Project/intro.txt", "r")as my_file:
         file_data = my_file.read()
         print(file_data)
 except FileNotFoundError as e:
     print ("File not found.")
-except IOError as e:
-    print ("An error has occurred.")
-    print(e)
 
+# 2nd Try: also pulls data, but from "instructions.txt" instead, and also pastes them when the user runs command.
 try:
     with open ("Project/instructions.txt", "r")as my_file:
         file_data = my_file.read()
@@ -45,12 +53,9 @@ try:
         print("")
 except FileNotFoundError as e:
     print ("File not found.")
-except IOError as e:
-    print ("An error has occurred.")
-    print(e)
 
-
-
+# Intended to save the game when the user types "lopeta" (as per project rule)
+# However not sure how to make it save and resume when user comes back.
 def save_game (player):
     save_data = {
         "name": player.name,
@@ -63,17 +68,17 @@ def save_game (player):
 
 
 # ENTRANCE TO MAIN MENU:
-
+# User inputs name and age
 user_name = input("State your name: ")
 player_age = int(input("State your age: "))
 game_name = ("The Lumberjack")
-
+# If user age under 12 they're not allowed to play.
 if player_age < 12:
     print("You are too young to play this game.")
     exit()
-
+# User info gets put into Player class.
 user = Player(name = user_name, location = "main_menu")
-
+# Prints users inputs
 print(f"Your name: {user.name}")
 print(f"your age: {player_age}")
 print("")
@@ -82,6 +87,9 @@ print(f"Welcome {user.name}!")
 # GAME DECISIONS:
 
 # (MAIN MENU OPTIONS):
+# Main menu to start after intro and instructions from seperate files.
+# "While True" statement here and in every function makes them force to play after each earlier area directly starting
+# them with "return []" statements.
 def main_menu_start(player):
     while True:
         print("'1': Begin Chopping")
@@ -104,7 +112,8 @@ def rules_start(player):
             return "main_menu"
         else:
             print("Please type 'back', to return to the main menu.")
-
+# "save_game(player)" is supposed to trigger the save game info grab and dump but it does not and 
+# I don't know how to do it
 def quit_game_start(player):
     print("Thank you for trying the game!")
     save_game(player)
@@ -112,9 +121,11 @@ def quit_game_start(player):
 
 
 # START OF GAME AND OPTIONS:
-
+# Each area includes "else:" for invalid commands, which do not exit the function loop
+# Most areas include an "elif:" statement which allows the user to view their player inventory.
+# Each area has "return_..." to trigger the next area loop, and also close the current loop.
 def begin_game_start(player):
-    while  True:
+    while True:
         beginning = input("Do you try to 'attack' the roots or 'go home'? ")
         if beginning == "attack":
             print("You have no way of breaking through them, yet still, you try, and your hands hurt after trying.")
@@ -129,7 +140,8 @@ def begin_game_start(player):
             print("")
             print("that is not a valid command, please try again")
             print("")
-
+# This area contains the first of a few choices where the user is pointed to cutting down a tree, the random generator is used
+# to produce a random number between 1 and 3, and give it to the user inventory.
 def after_shack_start(player):
     print("To your left you see a huddle of thin trees, and to your right, the path continues deeper into the forest.")
     while True:
@@ -168,7 +180,11 @@ def after_shack_start(player):
             print("")
             print("that is not a valid command, please try again")
             print("")
+# All areas before "dark_path" were at the beginning of the project when I was still learning basics, so that is the reason
+# why they have only one direction, sort of like a tutorial for the user and also for me.
 
+# This area includes a stranger who will buy the wood from the user if they want to sell them, if they agree, the game takes 
+# the user's wood and converts it into coins, then shows the player their inventory.
 def dark_path_start(player):
     print("You see the silhouette of a structure to the left, and a huddle of trees awaiting chopping to the right.")
     while True:
@@ -268,7 +284,8 @@ def dark_path_start(player):
             print("")
             print("that is not a valid command, please try again")
             print("")
-
+# First ending, all endings contain a text explaining the ending the user has forced their character into,
+# and then congratulating (sometimes) the user, before returning to the main menu.
 def ending_friendly_start(player):
     print("The world looks beautiful. You look down and the squirrel is by your side:")
     print("This is your reward for caring about the forest and it's inhabitants. I thank you. We all thank you.")
@@ -427,7 +444,7 @@ def ending_unkind_start(player):
 
 
 # DICTIONARY OF AREAS (ROOMS):
-
+# Dictionary containing all areas of the game, including endings and also the main menu.
 area_map = {
     "main_menu": Area(
         name = "The Lumberjack",
@@ -508,7 +525,8 @@ area_map = {
 
 
 # MAKE THE GAME WORK AND UPDATES PLAYER LOCATION:
-
+# Loop which lasts the entire time the file is ran, after game begins.
+# Attempted to put in a save game part.
 while True:
     area_place = user.location
     if area_place == "lopeta":
