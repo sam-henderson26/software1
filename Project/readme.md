@@ -14,6 +14,6 @@ Will do more progress tomorrow (28/9)
 
 Added in multiple endings to the game, many lines, added in intro.txt and instructions.txt and made it so the game will dump both upon running the game. 2/10
 
-added in a save game function but cant get it to work... 2/10
+added in a save game function but cant get it to work.
 
 Main goal of the game is to venture through the forest until meeting a decision which will affect your ending.

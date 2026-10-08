@@ -5,3 +5,4 @@ Instructions
 3. You can view your inventory at any time using "i".
 4. Try to balance your resources, just in case you need them in the future...
 5. Don't take the wrong path, it might not be rewarding, depending on the choices you make.
+6. Do your best to escape the forest.
